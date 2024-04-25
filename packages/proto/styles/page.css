@@ -1,0 +1,66 @@
+.banner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(245, 45, 45); /* Red background color */
+    color: #e7d9d9; /* Example text color */
+    padding: 5px;
+    text-align: center;
+    padding: 5px 20px;
+}
+.nav {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Align items horizontally at the center */
+}
+.nav ul {
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Use flexbox for list items */
+}
+
+.nav li {
+    margin: 0px 30px; /* Add spacing between list items */
+}
+
+.nav a {
+    text-decoration: none; /* Remove default underline */
+    color: rgb(233, 223, 223); /* Set link color */
+}
+.banner h1 {
+    font-size: 40px; /* Adjust the font size of the heading */
+}
+.login {
+    position: absolute;
+    top: 10px; /* Adjust top position */
+    right: 20px; /* Adjust right position */
+    display: flex;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    background-color: rgb(245, 45, 45);
+}
+.card-container {
+    display: flex;
+    justify-content: center; /* Horizontally center the cards */
+}
+.card {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Rounded corners */
+    margin: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.card-content {
+    padding: 20px;
+}
+   
+body {
+    color: rgb(0, 0, 0);
+    font-family: "Cambria", Georgia, serif;
+    font-weight: normal; /* or bold, etc. */
+    font-size: 20px; /* adjust as needed */
+    font-style: normal; /* or italic, etc. */
+}
