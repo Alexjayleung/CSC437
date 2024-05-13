@@ -1,0 +1,48 @@
+:root {
+    /* Banner */
+    --banner-background-color: rgb(245, 45, 45);
+    --banner-text-color: #e7d9d9;
+    --banner-padding: 5px 20px;
+  
+    /* Navigation */
+    --nav-link-color: rgb(233, 223, 223);
+    --nav-link-margin: 0px 30px;
+  
+    /* Login */
+    --login-text-color: rgb(245, 236, 236);
+    --login-background-color: rgb(245, 45, 45);
+  
+    /* Card */
+    --card-width: 300px;
+    --card-border: 1px solid #ccc;
+    --card-border-radius: 10px;
+    --card-margin: 20px;
+    --card-cursor: pointer;
+    --card-transition: transform 0.3s ease;
+    --card-font-color: rgb(0, 0, 0);
+  
+    /* Typography */
+    --font-family: "Cambria", Georgia, serif;
+    --font-size-base: 20px;
+  
+    /* Spacing */
+    --spacing-test: 30px;
+
+    /* page */
+    --page-color: rgb(250, 250, 250);
+    --page-h3-color: rgb(0, 0, 0);
+  }
+     
+
+
+  body.dark-mode {
+    --banner-background-color: rgb(90, 87, 87);
+    --login-background-color: rgb(90, 87, 87);
+    --card-background-color: black;
+    --card-font-color: rgb(250, 246, 246);
+    --page-color:black;
+    --page-h3-color: rgb(246, 241, 241);
+
+
+  }
+  
