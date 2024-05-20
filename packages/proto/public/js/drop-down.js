@@ -2,7 +2,7 @@ import { prepareTemplate } from "./template.js";
 
 export class DropdownElement extends HTMLElement {
   static template = prepareTemplate(`<template>
-    <slot name="actuator"><button> Menu </button></slot>
+    <slot name="actuator"><button> Settings </button></slot>
     <div id="panel">
       <slot></slot>
     </div>
