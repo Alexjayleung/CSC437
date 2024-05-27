@@ -24,17 +24,10 @@ module.exports = __toCommonJS(profile_svc_exports);
 var import_mongoose = require("mongoose");
 const ProfileSchema = new import_mongoose.Schema(
   {
-    // id: { type: String, required: true, trim: true },
-    // name: { type: String, required: true, trim: true },
-    // gamertag: { type: String, trim: true },
-    // favoriteGames: [String],
-    // avatar: String,
-    // color: String
     userid: { type: String, required: true, trim: true },
     name: { type: String, required: true, trim: true },
-    nickname: { type: String, trim: true },
-    home: { type: String, trim: true },
-    airports: [String],
+    gamertag: { type: String, trim: true },
+    favoriteGames: [String],
     avatar: String,
     color: String
   },
@@ -48,10 +41,6 @@ function get(userid) {
   return ProfileModel.find({ userid }).then((list) => list[0]).catch((err) => {
     throw `${userid} Not Found`;
   });
-}
-function create(profile) {
-  const p = new ProfileModel(profile);
-  return p.save();
 }
 function update(userid, profile) {
   return ProfileModel.findOne({ userid }).then((found) => {
@@ -69,4 +58,15 @@ function update(userid, profile) {
     else return updated;
   });
 }
-var profile_svc_default = { index, get, create, update };
+function create(profile) {
+  const p = new ProfileModel(profile);
+  return p.save();
+}
+function remove(userid) {
+  return ProfileModel.findOneAndDelete({ userid }).then(
+    (deleted) => {
+      if (!deleted) throw `${userid} not deleted`;
+    }
+  );
+}
+var profile_svc_default = { index, get, create, update, remove };

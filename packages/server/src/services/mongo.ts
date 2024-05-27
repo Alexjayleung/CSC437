@@ -1,12 +1,11 @@
-// src/services/mongo.ts
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 
 mongoose.set("debug", true);
 dotenv.config();
 
 function getMongoURI(dbname: string) {
-  let connection_string = `mongodb://localhost:3000/${dbname}`;
+  let connection_string = `mongodb://localhost:27017/${dbname}`;
   const { MONGO_USER, MONGO_PWD, MONGO_CLUSTER } = process.env;
 
   if (MONGO_USER && MONGO_PWD && MONGO_CLUSTER) {

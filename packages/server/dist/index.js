@@ -24,17 +24,20 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var import_express = __toESM(require("express"));
 var import_profiles = __toESM(require("./routes/profiles"));
 var import_mongo = require("./services/mongo");
-var import_cors = __toESM(require("cors"));
+(0, import_mongo.connect)("gamin");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
-app.use((0, import_cors.default)());
-(0, import_mongo.connect)("Gamin");
 const staticDir = process.env.STATIC || "public";
 app.use(import_express.default.static(staticDir));
 app.use(import_express.default.json());
 app.use("/api/profiles", import_profiles.default);
-app.get("/hello", (req, res) => {
-  res.send("Hello, World");
+app.get("/hello", (_, res) => {
+  res.send(
+    `<h1>Hello!</h1>
+     <p>Server is up and running.</p>
+     <p>Serving static files from <code>${staticDir}</code>.</p>
+    `
+  );
 });
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
