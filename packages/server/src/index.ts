@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import profiles from "./routes/profiles";
 import { connect } from "./services/mongo";
+import auth, { authenticateUser } from "./routes/auth";
 
 // Mongo Connection
 connect("gamin");
@@ -12,9 +13,10 @@ const staticDir = process.env.STATIC || "public";
 // Middleware:
 app.use(express.static(staticDir));
 app.use(express.json());
+app.use("/auth", auth);
 
 // API Routes:
-app.use("/api/profiles", profiles);
+app.use("/api/profiles", authenticateUser, profiles);
 
 // HTML Routes:
 app.get("/hello", (_: Request, res: Response) => {
