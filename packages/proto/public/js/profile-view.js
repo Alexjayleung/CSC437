@@ -1,4 +1,6 @@
 import { prepareTemplate } from "./template.js";
+import { loadJSON } from "./json-loader.js";
+
 
 export class ProfileViewElement extends HTMLElement {
   static styles = `
@@ -6,29 +8,31 @@ export class ProfileViewElement extends HTMLElement {
       margin: 0;
       box-sizing: border-box;
     }
+    input{ 
+        width: 100%;
+        max-width: 200px; 
+      }
+      input[type="color"] {
+        width: 100%;
+        max-width: 50px; 
+      }
+    input-array {
+        width: 100%;
+        max-width: 200px;
+        display: flex;
+        flex-direction: column;
+      }
+      
     /* etc... */
   `;
+  get src() {
+    return this.getAttribute("src");
+  }
+    
 
   static template = prepareTemplate(`
   <template>
   <section>
-    <slot name="avatar"></slot>
-    <h1><slot name="name"></slot></h1>
-      <nav>
-        <button class="new"
-          onclick="relayEvent(event,'profile-view:new-mode')"
-        >New…</button>
-        <button class="edit"
-          onclick="relayEvent(event,'profile-view:edit-mode')"
-        >Edit</button>
-        <button class="close"
-          onclick="relayEvent(event,'profile-view:view-mode')"
-        >Close</button>
-        <button class="delete"
-          onclick="relayEvent(event,'profile-view:delete')"
-          >Delete</button
-        >
-      </nav>
       <restful-form>
         <label>
           <span>Username</span>
@@ -39,17 +43,13 @@ export class ProfileViewElement extends HTMLElement {
           <input name="name" />
         </label>
         <label>
-          <span>Nickname</span>
-          <input name="nickname" />
+          <span>Gamertag</span>
+          <input name="gamertag" />
         </label>
         <label>
-          <span>Home City</span>
-          <input name="home" />
-        </label>
-        <label>
-          <span>Airports</span>
-          <input-array name="airports">
-            <span slot="label-add">Add an airport</span>
+          <span>FavoriteGames</span>
+          <input-array name="favoriteGames">
+            <span slot="label-add">Add a game</span>
           </input-array>
         </label>
         <label>
@@ -83,6 +83,22 @@ export class ProfileViewElement extends HTMLElement {
       ProfileViewElement.template.cloneNode(true)
     );
   }
+
+  connectedCallback() {
+    if ( this.src )
+      loadJSON(this.src, this, renderSlots);
+  }
 }
 
 customElements.define("profile-view", ProfileViewElement);
+
+function renderSlots(json) {
+    const entries = Object.entries(json);
+    const slot = ([key, value]) => {
+      // default case for now:
+      return `<span slot="${key}">${value}</span>`;
+    };
+  
+    return entries.map(slot).join("\n");
+  }
+  

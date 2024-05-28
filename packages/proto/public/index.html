@@ -14,6 +14,7 @@
         <script type="module" src="/js/json-loader.js"></script>
         <script type="module" src="/js/restful-form.js"></script>
         <script type="module" src="/js/input-array.js"></script>
+        <script type="module" src="/js/profile-view.js"></script>
         <script type="module">
             import { relayEvent } from "/js/relay-event.js";
             window.relayEvent = relayEvent;
@@ -81,53 +82,7 @@
         </div>
 
         <main>
-            <restful-form slot="form" src="/api/profiles/Jay" id="profileForm">
-                <label>
-                    <span>Username</span>
-                    <input name="userid" disabled />
-                </label>
-                <label>
-                    <span>Name</span>
-                    <input name="name" required />
-                </label>
-                <label>
-                    <span>Gamertag</span>
-                    <input name="gamertag" />
-                </label>
-                <label>
-                    <span>Favorite Games</span>
-                    <input-array name="favorite Games">
-                        <span slot="label-add">Add a game</span>
-                    </input-array>
-                </label>
-                <label>
-                    <span>Avatar</span>
-                    <input name="avatar" />
-                </label>
-                <label>
-                    <span>Color</span>
-                    <input type="color" name="color" />
-                </label>
-                <button slot="delete" onclick="relayEvent(event,'restful-form:delete')">Delete this Profile</button>
-            </restful-form>
-        
-         <json-object src="/api/profiles/Jay">
-            <a href="#" onclick="relayEvent(event, 'json-object:open')">
-              Alex Leung
-            </a>
-        </json-object>
-        <profile-view>
-            <span slot="userid">Jay</span>
-            <span slot="name">Alex Leung</span>
-            <span slot="gamertag">Jayslayin</span>
-            <ul slot="favoriteGames">
-              <li>Valorant</li>
-              <li>League of Legends</li>
-              <li>Elden Ring</li>
-            </ul>
-            <span slot="color">#a954c2</span>
-          </profile-view>
-
+            <profile-view src="/api/profiles/Jay"> </profile-view>
         </main>
     </body>
 </html>
