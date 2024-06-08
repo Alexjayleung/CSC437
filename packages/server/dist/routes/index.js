@@ -49,6 +49,7 @@ router.get("/:userid", (req, res) => {
 });
 router.put("/:userid", (req, res) => {
   const { userid } = req.params;
+  console.log(userid +" %^$%$%$%$%")
   const newProfile = req.body;
   import_profiles.default.update(userid, newProfile).then((profile) => res.json(profile)).catch((err) => res.status(404).end());
 });

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/page.css"/>
+    <link rel="stylesheet" href="/styles/tokens.css">
+    <link rel="resetrules" href="/styles/reset.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/drop-down.js"></script>
+    <script type="module" src="/js/json-loader.js"></script>
+
+    <script type="module">
+        import { relayEvent } from "/js/relay-event.js";
+        window.relayEvent = relayEvent;
+    </script>
+
+    <script type="module">
+        function toggleDarkMode(page, checked) {
+        page.classList.toggle("dark-mode", checked);
+    }
+
+        document.body.addEventListener("dark-mode", (event) =>
+        toggleDarkMode(
+        event.currentTarget,
+        event.detail.checked
+      )
+    );
+    </script>
+
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>GAMER'S GUIDE</h1>
+                <div class="login">
+                    <drop-down>
+                        <button class="login-btn">Log In</button>
+                        <label
+                            onchange="relayEvent(event, 'dark-mode', {checked: event.target.checked})">
+                            <input type="checkbox" autocomplete="off" /> Dark mode
+                        </label>
+                </drop-down>
+                </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a >About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="team-section">
+            <h2>G2 Esports</h2>
+            <div class="team-container">
+                <div class="team-member" onclick="showModal('Caps', 'images/caps.png', 'Mid Laner', 'Caps is known for his aggressive playstyle and incredible mechanics. He has been a pivotal part of G2\'s success, bringing creativity and unpredictability to the mid lane.')">
+                    <img src='images/caps.png' alt="Caps">
+                    <h3>Rasmus "Caps" Winther</h3>
+                    <p>Role: Mid Laner</p>
+                    <p>Bio: Caps is known for his aggressive playstyle and incredible mechanics. He has been a pivotal part of G2's success, bringing creativity and unpredictability to the mid lane.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Rekkles', 'images/rekkles.png', 'AD Carry', 'Rekkles is a veteran AD Carry with years of experience and a reputation for consistent performance. His precision and strategic approach to the game make him a cornerstone of G2\'s team fights.')">
+                    <img src='images/rekkles.jpeg' alt="Rekkles">
+                    <h3>Carl Martin Erik "Rekkles" Larsson</h3>
+                    <p>Role: AD Carry</p>
+                    <p>Bio: Rekkles is a veteran AD Carry with years of experience and a reputation for consistent performance. His precision and strategic approach to the game make him a cornerstone of G2's team fights.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Jankos', 'images/jankos.png', 'Jungler', 'Jankos is a highly experienced jungler known for his aggressive ganks and excellent map control. He has been a vital part of G2\'s success, bringing stability and leadership to the team.')">
+                    <img src='images/jankos.png' alt="Jankos">
+                    <h3>Marcin "Jankos" Jankowski</h3>
+                    <p>Role: Jungler</p>
+                    <p>Bio: Jankos is a highly experienced jungler known for his aggressive ganks and excellent map control. He has been a vital part of G2's success, bringing stability and leadership to the team.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Wunder', 'images/wunder.png', 'Top Laner', 'Wunder is known for his flexible champion pool and ability to adapt to different strategies. His innovative playstyle and strong laning phase make him a formidable top laner.')">
+                    <img src='images/wunder.png' alt="Wunder">
+                    <h3>Martin "Wunder" Hansen</h3>
+                    <p>Role: Top Laner</p>
+                    <p>Bio: Wunder is known for his flexible champion pool and ability to adapt to different strategies. His innovative playstyle and strong laning phase make him a formidable top laner.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Mikyx', 'images/mikyx.jpeg', 'Support', 'Mikyx is a highly skilled support player known for his playmaking abilities and excellent synergy with his AD Carry. He is crucial in setting up plays and providing vision control for the team.')">
+                    <img src='images/mikyx.jpeg' alt="Mikyx">
+                    <h3>Mihael "Mikyx" Mehle</h3>
+                    <p>Role: Support</p>
+                    <p>Bio: Mikyx is a highly skilled support player known for his playmaking abilities and excellent synergy with his AD Carry. He is crucial in setting up plays and providing vision control for the team.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="playerName"></h2>
+            <img id="playerImage" src="" alt="">
+            <p id="playerRole"></p>
+            <p id="playerBio"></p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(name, image, role, bio) {
+            document.getElementById('playerName').textContent = name;
+            document.getElementById('playerImage').src = image;
+            document.getElementById('playerRole').textContent = role;
+            document.getElementById('playerBio').textContent = bio;
+            document.getElementById('playerModal').style.display = "block";
+        }
+
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('playerModal').style.display = "none";
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('playerModal')) {
+                document.getElementById('playerModal').style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

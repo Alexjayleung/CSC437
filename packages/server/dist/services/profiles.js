@@ -24,7 +24,7 @@ __export(profiles_exports, {
 module.exports = __toCommonJS(profiles_exports);
 let profiles = [
   {
-    id: "Alex",
+    id: "Jay",
     name: "Alex Leung",
     gamertag: "Jayslayin",
     favoriteGames: ["Valorant", "League of Legends", "Elden Ring"],

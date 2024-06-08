@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/page.css"/>
+    <link rel="stylesheet" href="/styles/tokens.css">
+    <link rel="resetrules" href="/styles/reset.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/drop-down.js"></script>
+    <script type="module" src="/js/json-loader.js"></script>
+    <title>Esports</title>
+
+    <script type="module">
+        import { relayEvent } from "/js/relay-event.js";
+        window.relayEvent = relayEvent;
+    </script>
+
+    <script type="module">
+        function toggleDarkMode(page, checked) {
+            page.classList.toggle("dark-mode", checked);
+        }
+
+        document.body.addEventListener("dark-mode", (event) =>
+            toggleDarkMode(
+                event.currentTarget,
+                event.detail.checked
+            )
+        );
+    </script>
+
+    <script>
+        function loadContent(url, container) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const fragment = document.createRange().createContextualFragment(xhr.responseText);
+                        if (container.classList.contains('content-loaded')) {
+                            container.classList.toggle('hidden');
+                        } else {
+                            container.appendChild(fragment);
+                            container.classList.add('content-loaded');
+                        }
+                    } else {
+                        console.error('Error loading content: ' + xhr.status);
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</head>
+<body class="page">
+    <header>
+        <div class="banner">
+            <h1>GAMER'S GUIDE</h1>
+            <div class="login">
+                <drop-down>
+                    <button class="login-btn">Log In</button>
+                    <label onchange="relayEvent(event, 'dark-mode', {checked: event.target.checked})">
+                        <input type="checkbox" autocomplete="off" /> Dark mode
+                    </label>
+                </drop-down>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <h1>Esports</h1>
+    <p>Esports, short for electronic sports, refers to competitive video gaming at a professional level. It involves organized multiplayer video game competitions between professional players or teams. Esports has gained significant popularity worldwide, with a growing fan base and lucrative prize pools.</p>
+
+    <h2>League of Legends Esports Tournaments</h2>
+    <p>Upcoming Events:</p>
+    <ul>
+        <dd class="tournament">
+            <details>
+                <summary onclick="loadContent('leagueEvents/worlds.html', event.target.closest('dd'));">League of Legends World Championship</summary>
+            </details>
+        </dd>
+        <dd class="tournament">
+            <details>
+                <summary onclick="loadContent('leagueEvents/msi.html', event.target.closest('dd'));">Mid-Season Invitational (MSI)</summary>
+            </details>
+        </dd>
+        <dd class="tournament">
+            <details>
+                <summary onclick="loadContent('leagueEvents/lcs.html', event.target.closest('dd'));">League of Legends Championship Series (LCS)</summary>
+            </details>
+        </dd>
+    </ul>
+
+    <!-- Container elements for fragment content -->
+    <div id="worlds-container"></div>
+    <div id="msi-container"></div>
+    <div id="lcs-container"></div>
+
+    <p><a href="team2.html">Check out the teams</a></p>
+    <p><a href="index.html">Back to Main Page</a></p>
+</body>
+</html>

@@ -36,39 +36,40 @@ export class JsonObjectElement extends HTMLElement {
     const src = this.getAttribute("src");
     const open = this.hasAttribute("open");
 
-    if (open) loadJSON(src, this, renderJSON);
+    if (open) loadJSON(src, this, renderAssignments);
 
     this.addEventListener("json-object:open", () =>
-      loadJSON(src, this, renderJSON)
+      loadJSON(src, this, renderAssignments)
     );
   }
 }
 
 customElements.define("json-object", JsonObjectElement);
 
-export function loadJSON(src, container, render) {
+export function loadJSON(
+  src,
+  container,
+  render,
+  authorization
+) {
   container.replaceChildren();
-  fetch(src)
+  return fetch(src, {
+    headers: authorization || undefined
+  })
     .then((response) => {
       if (response.status !== 200) {
-        throw `Status: ${response.status}`;
+        throw {
+          status: response.status,
+          url: src,
+          headers: authorization
+        };
       }
       return response.json();
     })
-    .then((json) => addFragment(render(json), container))
-    .catch((error) =>
-      addFragment(
-        `<dt class="error">Error</dt>
-         <dd>${error}</dd>
-         <dt>While Loading</dt>
-         <dd>${src}</dd>
-        `,
-        container
-      )
-    );
+    .then((json) => addFragment(render(json), container));
 }
 
-function renderJSON(json) {
+function renderAssignments(json) {
   const entries = Object.entries(json);
   const dtdd = ([key, value]) => `
     <dt>${key}</dt>

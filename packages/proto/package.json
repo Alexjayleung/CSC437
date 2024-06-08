@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "public/index.html",
-    "scripts": {
-	"start": "http-server",
-	"test": "echo \"Error: no test specified\" && exit 1"
+  "scripts": {
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@calpoly/mustang": "^0.1.11",
     "http-server": "^14.1.1"
   }
 }

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/page.css"/>
+    <link rel="stylesheet" href="/styles/tokens.css">
+    <link rel="resetrules" href="/styles/reset.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/drop-down.js"></script>
+    <script type="module" src="/js/json-loader.js"></script>
+
+    <script type="module">
+        import { relayEvent } from "/js/relay-event.js";
+        window.relayEvent = relayEvent;
+    </script>
+
+    <script type="module">
+        function toggleDarkMode(page, checked) {
+        page.classList.toggle("dark-mode", checked);
+    }
+
+        document.body.addEventListener("dark-mode", (event) =>
+        toggleDarkMode(
+        event.currentTarget,
+        event.detail.checked
+      )
+    );
+    </script>
+
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>GAMER'S GUIDE</h1>
+                <div class="login">
+                    <drop-down>
+                        <button class="login-btn">Log In</button>
+                        <label
+                            onchange="relayEvent(event, 'dark-mode', {checked: event.target.checked})">
+                            <input type="checkbox" autocomplete="off" /> Dark mode
+                        </label>
+                </drop-down>
+                </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a >About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="team-section">
+            <h2>Fnatic Valorant Team</h2>
+            <div class="team-container">
+                <div class="team-member" onclick="showModal('Boaster', 'images/boaster.jpeg', 'In-Game Leader (IGL) / Support', 'Boaster is the charismatic leader of Fnatic, known for his strategic mind and ability to keep the team motivated. His experience and leadership are crucial to Fnatic’s success.')">
+                    <img src="images/boaster.jpeg" alt="Boaster">
+                    <h3>Jake "Boaster" Howlett</h3>
+                    <p>Role: In-Game Leader (IGL) / Support</p>
+                    <p>Bio: Boaster is the charismatic leader of Fnatic, known for his strategic mind and ability to keep the team motivated. His experience and leadership are crucial to Fnatic’s success.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Derke', 'images/derke.jpeg', 'Duelist', 'Derke is a Finnish prodigy known for his sharp aim and aggressive playstyle. As a Duelist, he often leads the charge, securing crucial kills for his team.')">
+                    <img src="images/derke.jpeg" alt="Derke">
+                    <h3>Nikita "Derke" Sirmitev</h3>
+                    <p>Role: Duelist</p>
+                    <p>Bio: Derke is a Finnish prodigy known for his sharp aim and aggressive playstyle. As a Duelist, he often leads the charge, securing crucial kills for his team.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Magnum', 'images/magnum.jpeg', 'Sentinel', 'Magnum is known for his strategic plays and ability to outsmart opponents. His role as a Sentinel is to provide support and gather information for his team, ensuring they have the upper hand.')">
+                    <img src="images/magnum.jpeg" alt="Magnum">
+                    <h3>Martin "Magnum" Peňkov</h3>
+                    <p>Role: Sentinel</p>
+                    <p>Bio: Magnum is known for his strategic plays and ability to outsmart opponents. His role as a Sentinel is to provide support and gather information for his team, ensuring they have the upper hand.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Mistic', 'images/mistic.jpeg', 'Controller', 'Mistic is a consistent performer known for his control over the game. His ability to manage and execute strategies under pressure makes him an essential part of Fnatic.')">
+                    <img src="images/mistic.jpeg" alt="Mistic">
+                    <h3>James "Mistic" Orfila</h3>
+                    <p>Role: Controller</p>
+                    <p>Bio: Mistic is a consistent performer known for his control over the game. His ability to manage and execute strategies under pressure makes him an essential part of Fnatic.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Doma', 'images/doma.jpeg', 'Flex', 'Doma is a flexible player who can adapt to any role required by his team. His versatility and skill make him a key player for Fnatic, capable of filling any gap in the team’s strategy.')">
+                    <img src="images/doma.jpeg" alt="Doma">
+                    <h3>Domagoj "Doma" Fancev</h3>
+                    <p>Role: Flex</p>
+                    <p>Bio: Doma is a flexible player who can adapt to any role required by his team. His versatility and skill make him a key player for Fnatic, capable of filling any gap in the team’s strategy.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    </main>
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="playerName"></h2>
+            <img id="playerImage" src="" alt="">
+            <p id="playerRole"></p>
+            <p id="playerBio"></p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(name, image, role, bio) {
+            document.getElementById('playerName').textContent = name;
+            document.getElementById('playerImage').src = image;
+            document.getElementById('playerRole').textContent = role;
+            document.getElementById('playerBio').textContent = bio;
+            document.getElementById('playerModal').style.display = "block";
+        }
+
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('playerModal').style.display = "none";
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('playerModal')) {
+                document.getElementById('playerModal').style.display = "none";
+            }
+        });
+    </script>
+</body>

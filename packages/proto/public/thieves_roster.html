@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/page.css"/>
+    <link rel="stylesheet" href="/styles/tokens.css">
+    <link rel="resetrules" href="/styles/reset.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/drop-down.js"></script>
+    <script type="module" src="/js/json-loader.js"></script>
+
+    <script type="module">
+        import { relayEvent } from "/js/relay-event.js";
+        window.relayEvent = relayEvent;
+    </script>
+
+    <script type="module">
+        function toggleDarkMode(page, checked) {
+        page.classList.toggle("dark-mode", checked);
+    }
+
+        document.body.addEventListener("dark-mode", (event) =>
+        toggleDarkMode(
+        event.currentTarget,
+        event.detail.checked
+      )
+    );
+    </script>
+
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>GAMER'S GUIDE</h1>
+                <div class="login">
+                    <drop-down>
+                        <button class="login-btn">Log In</button>
+                        <label
+                            onchange="relayEvent(event, 'dark-mode', {checked: event.target.checked})">
+                            <input type="checkbox" autocomplete="off" /> Dark mode
+                        </label>
+                </drop-down>
+                </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a >About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="team-section">
+            <h2>100 Thieves Valorant Team</h2>
+            <div class="team-container">
+                <div class="team-member" onclick="showModal('Hiko', 'images/hiko.jpeg', 'Support / Clutch Master', 'Hiko is known for his incredible clutch plays and calm demeanor under pressure. A veteran in the FPS scene, he brings a wealth of experience and tactical knowledge to 100 Thieves.')">
+                    <img src="images/hiko.jpeg" alt="Hiko">
+                    <h3>Spencer "Hiko" Martin</h3>
+                    <p>Role: Support / Clutch Master</p>
+                    <p>Bio: Hiko is known for his incredible clutch plays and calm demeanor under pressure. A veteran in the FPS scene, he brings a wealth of experience and tactical knowledge to 100 Thieves.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Asuna', 'images/asuna.jpeg', 'Duelist', 'Asuna is a young prodigy known for his explosive plays and aggressive style. He is a key player in 100 Thieves, often leading the charge in matches.')">
+                    <img src="images/asuna.jpeg" alt="Asuna">
+                    <h3>Peter "Asuna" Mazuryk</h3>
+                    <p>Role: Duelist</p>
+                    <p>Bio: Asuna is a young prodigy known for his explosive plays and aggressive style. He is a key player in 100 Thieves, often leading the charge in matches.</p>
+                </div>
+                <div class="team-member" onclick="showModal('nitr0', 'images/nitro.jpeg', 'In-Game Leader (IGL) / Controller', 'nitr0 transitioned from CS:GO to Valorant, bringing his extensive experience and leadership skills to 100 Thieves. He plays a pivotal role in the team’s strategy and execution.')">
+                    <img src="images/nitro.jpeg" alt="nitr0">
+                    <h3>Nick "nitr0" Cannella</h3>
+                    <p>Role: In-Game Leader (IGL) / Controller</p>
+                    <p>Bio: nitr0 transitioned from CS:GO to Valorant, bringing his extensive experience and leadership skills to 100 Thieves. He plays a pivotal role in the team’s strategy and execution.</p>
+                </div>
+                <div class="team-member" onclick="showModal('steel', 'images/steel.jpeg', 'Sentinel', 'steel is known for his strategic mind and ability to read the game. As a Sentinel, he provides crucial support and information to his team, ensuring they are always one step ahead of their opponents.')">
+                    <img src="images/steel.jpeg" alt="steel">
+                    <h3>Joshua "steel" Nissan</h3>
+                    <p>Role: Sentinel</p>
+                    <p>Bio: steel is known for his strategic mind and ability to read the game. As a Sentinel, he provides crucial support and information to his team, ensuring they are always one step ahead of their opponents.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Ethan', 'images/ethan.jpeg', 'Flex', 'Ethan is a versatile player who can adapt to any role required by the team. His flexibility and skill make him an invaluable asset to 100 Thieves.')">
+                    <img src="images/ethan.jpeg" alt="Ethan">
+                    <h3>Ethan "Ethan" Arnold</h3>
+                    <p>Role: Flex</p>
+                    <p>Bio: Ethan is a versatile player who can adapt to any role required by the team. His flexibility and skill make him an invaluable asset to 100 Thieves.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="playerName"></h2>
+            <img id="playerImage" src="" alt="">
+            <p id="playerRole"></p>
+            <p id="playerBio"></p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(name, image, role, bio) {
+            document.getElementById('playerName').textContent = name;
+            document.getElementById('playerImage').src = image;
+            document.getElementById('playerRole').textContent = role;
+            document.getElementById('playerBio').textContent = bio;
+            document.getElementById('playerModal').style.display = "block";
+        }
+
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('playerModal').style.display = "none";
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('playerModal')) {
+                document.getElementById('playerModal').style.display = "none";
+            }
+        });
+    </script>
+</body>

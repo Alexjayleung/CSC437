@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/page.css"/>
+    <link rel="stylesheet" href="/styles/tokens.css">
+    <link rel="resetrules" href="/styles/reset.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/drop-down.js"></script>
+    <script type="module" src="/js/json-loader.js"></script>
+
+    <script type="module">
+        import { relayEvent } from "/js/relay-event.js";
+        window.relayEvent = relayEvent;
+    </script>
+
+    <script type="module">
+        function toggleDarkMode(page, checked) {
+        page.classList.toggle("dark-mode", checked);
+    }
+
+        document.body.addEventListener("dark-mode", (event) =>
+        toggleDarkMode(
+        event.currentTarget,
+        event.detail.checked
+      )
+    );
+    </script>
+
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>GAMER'S GUIDE</h1>
+                <div class="login">
+                    <drop-down>
+                        <button class="login-btn">Log In</button>
+                        <label
+                            onchange="relayEvent(event, 'dark-mode', {checked: event.target.checked})">
+                            <input type="checkbox" autocomplete="off" /> Dark mode
+                        </label>
+                </drop-down>
+                </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a >About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="team-section">
+            <h2>Sentinels</h2>
+            <div class="team-container">
+                <div class="team-member" onclick="showModal('ShahZaM', 'images/shazam.png', 'In-Game Leader (IGL) / Duelist', 'ShahZaM is the brain behind Sentinels\' strategic plays, known for his impeccable leadership and sharp aim. He transitioned from CS:GO to Valorant and has since become one of the most respected figures in the game.')">
+                    <img src='images/shazam.png' alt="ShahZaM">
+                    <h3>Shahzeeb "ShahZaM" Khan</h3>
+                    <p>Role: In-Game Leader (IGL) / Duelist</p>
+                    <p>Bio: ShahZaM is the brain behind Sentinels' strategic plays, known for his impeccable leadership and sharp aim. He transitioned from CS:GO to Valorant and has since become one of the most respected figures in the game.</p>
+                </div>
+                <div class="team-member" onclick="showModal('SicK', 'images/sick.png', 'Flex', 'SicK is known for his versatility and ability to adapt to any situation. He can play multiple roles efficiently, making him a crucial asset to the team. His aggressive playstyle often catches opponents off guard.')">
+                    <img src='images/sick.png' alt="SicK">
+                    <h3>Hunter "SicK" Mims</h3>
+                    <p>Role: Flex</p>
+                    <p>Bio: SicK is known for his versatility and ability to adapt to any situation. He can play multiple roles efficiently, making him a crucial asset to the team. His aggressive playstyle often catches opponents off guard.</p>
+                </div>
+                <div class="team-member" onclick="showModal('zombs', 'images/zombs.png', 'Controller', 'zombs is the backbone of the team with his consistent performance and exceptional control over the game. His ability to hold sites and clutch situations is unparalleled, making him a key player in Sentinels\' defense.')">
+                    <img src='images/zombs.png' alt="zombs">
+                    <h3>Jared "zombs" Gitlin</h3>
+                    <p>Role: Controller</p>
+                    <p>Bio: zombs is the backbone of the team with his consistent performance and exceptional control over the game. His ability to hold sites and clutch situations is unparalleled, making him a key player in Sentinels' defense.</p>
+                </div>
+                <div class="team-member" onclick="showModal('dapr', 'images/dapr.png', 'Sentinel', 'dapr is renowned for his intelligence and ability to outplay his opponents. As a Sentinel, he provides vital information and support to his team, ensuring their strategies are executed flawlessly.')">
+                    <img src='images/dapr.png' alt="dapr">
+                    <h3>Michael "dapr" Gulino</h3>
+                    <p>Role: Sentinel</p>
+                    <p>Bio: dapr is renowned for his intelligence and ability to outplay his opponents. As a Sentinel, he provides vital information and support to his team, ensuring their strategies are executed flawlessly.</p>
+                </div>
+                <div class="team-member" onclick="showModal('TenZ', 'images/tenz.png', 'Duelist', 'TenZ is a mechanical prodigy, known for his incredible aim and flashy plays. As the primary Duelist, he is often the spearhead of the team’s aggressive strategies, consistently topping the scoreboard.')">
+                    <img src='images/tenz.png' alt="TenZ">
+                    <h3>Tyson "TenZ" Ngo</h3>
+                    <p>Role: Duelist</p>
+                    <p>Bio: TenZ is a mechanical prodigy, known for his incredible aim and flashy plays. As the primary Duelist, he is often the spearhead of the team’s aggressive strategies, consistently topping the scoreboard.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="playerName"></h2>
+            <img id="playerImage" src="" alt="">
+            <p id="playerRole"></p>
+            <p id="playerBio"></p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(name, image, role, bio) {
+            document.getElementById('playerName').textContent = name;
+            document.getElementById('playerImage').src = image;
+            document.getElementById('playerRole').textContent = role;
+            document.getElementById('playerBio').textContent = bio;
+            document.getElementById('playerModal').style.display = "block";
+        }
+
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('playerModal').style.display = "none";
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('playerModal')) {
+                document.getElementById('playerModal').style.display = "none";
+            }
+        });
+    </script>
+</body>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/page.css"/>
+    <link rel="stylesheet" href="/styles/tokens.css">
+    <link rel="resetrules" href="/styles/reset.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/drop-down.js"></script>
+    <script type="module" src="/js/json-loader.js"></script>
+
+    <script type="module">
+        import { relayEvent } from "/js/relay-event.js";
+        window.relayEvent = relayEvent;
+    </script>
+
+    <script type="module">
+        function toggleDarkMode(page, checked) {
+            page.classList.toggle("dark-mode", checked);
+        }
+
+        document.body.addEventListener("dark-mode", (event) => 
+            toggleDarkMode(
+                event.currentTarget,
+                event.detail.checked
+            )
+        );
+    </script>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>GAMER'S GUIDE</h1>
+            <div class="login">
+                <drop-down>
+                    <button class="login-btn">Log In</button>
+                    <label onchange="relayEvent(event, 'dark-mode', {checked: event.target.checked})">
+                        <input type="checkbox" autocomplete="off" /> Dark mode
+                    </label>
+                </drop-down>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a>About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="team-section">
+            <h2>Cloud9</h2>
+            <div class="team-container">
+                <div class="team-member" onclick="showModal('Fudge', 'images/fudge.png', 'Top Laner', 'Fudge is a versatile top laner known for his strong laning phase and team fight presence. He consistently performs well in both regional and international competitions.')">
+                    <img src='images/fudge.jpeg' alt="Fudge">
+                    <h3>Ibrahim "Fudge" Allami</h3>
+                    <p>Role: Top Laner</p>
+                    <p>Bio: Fudge is a versatile top laner known for his strong laning phase and team fight presence. He consistently performs well in both regional and international competitions.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Blaber', 'images/blaber.png', 'Jungler', 'Blaber is an aggressive jungler known for his proactive playstyle and ability to control the pace of the game. His early game impact often sets Cloud9 up for success.')">
+                    <img src='images/blaber.jpeg' alt="Blaber">
+                    <h3>Robert "Blaber" Huang</h3>
+                    <p>Role: Jungler</p>
+                    <p>Bio: Blaber is an aggressive jungler known for his proactive playstyle and ability to control the pace of the game. His early game impact often sets Cloud9 up for success.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Diplex', 'images/diplex.png', 'Mid Laner', 'Diplex is a skilled mid laner known for his wide champion pool and ability to adapt to different playstyles. He is a crucial part of Cloud9\'s strategic flexibility.')">
+                    <img src='images/diplex.jpeg' alt="Diplex">
+                    <h3>Jocelyn "Diplex" Boudy</h3>
+                    <p>Role: Mid Laner</p>
+                    <p>Bio: Diplex is a skilled mid laner known for his wide champion pool and ability to adapt to different playstyles. He is a crucial part of Cloud9's strategic flexibility.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Berserker', 'images/berserker.png', 'AD Carry', 'Berserker is a rising star in the AD Carry role, known for his mechanical prowess and precise positioning. He consistently delivers high damage output in team fights.')">
+                    <img src='images/berserker.jpeg' alt="Berserker">
+                    <h3>Kim "Berserker" Min-cheol</h3>
+                    <p>Role: AD Carry</p>
+                    <p>Bio: Berserker is a rising star in the AD Carry role, known for his mechanical prowess and precise positioning. He consistently delivers high damage output in team fights.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Zven', 'images/zven.png', 'Support', 'Zven is an experienced support known for his exceptional vision control and playmaking abilities. His leadership and experience are invaluable to Cloud9\'s success.')">
+                    <img src='images/zven.jpeg' alt="Zven">
+                    <h3>Jesper "Zven" Svenningsen</h3>
+                    <p>Role: Support</p>
+                    <p>Bio: Zven is an experienced support known for his exceptional vision control and playmaking abilities. His leadership and experience are invaluable to Cloud9's success.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="playerName"></h2>
+            <img id="playerImage" src="" alt="">
+            <p id="playerRole"></p>
+            <p id="playerBio"></p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(name, image, role, bio) {
+            document.getElementById('playerName').textContent = name;
+            document.getElementById('playerImage').src = image;
+            document.getElementById('playerRole').textContent = role;
+            document.getElementById('playerBio').textContent = bio;
+            document.getElementById('playerModal').style.display = "block";
+        }
+
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('playerModal').style.display = "none";
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('playerModal')) {
+                document.getElementById('playerModal').style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/page.css"/>
+    <link rel="stylesheet" href="/styles/tokens.css">
+    <link rel="resetrules" href="/styles/reset.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/drop-down.js"></script>
+    <script type="module" src="/js/json-loader.js"></script>
+
+    <script type="module">
+        import { relayEvent } from "/js/relay-event.js";
+        window.relayEvent = relayEvent;
+    </script>
+
+    <script type="module">
+        function toggleDarkMode(page, checked) {
+        page.classList.toggle("dark-mode", checked);
+    }
+
+        document.body.addEventListener("dark-mode", (event) =>
+        toggleDarkMode(
+        event.currentTarget,
+        event.detail.checked
+      )
+    );
+    </script>
+
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>GAMER'S GUIDE</h1>
+                <div class="login">
+                    <drop-down>
+                        <button class="login-btn">Log In</button>
+                        <label
+                            onchange="relayEvent(event, 'dark-mode', {checked: event.target.checked})">
+                            <input type="checkbox" autocomplete="off" /> Dark mode
+                        </label>
+                </drop-down>
+                </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a >About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="team-section">
+            <h2>T1</h2>
+            <div class="team-container">
+                <div class="team-member" onclick="showModal('Faker', 'images/faker.jpeg', 'Mid Laner', 'Faker is a legendary mid laner known for his incredible mechanics and strategic mind. He has led T1 to multiple world championships and is widely regarded as one of the greatest League of Legends players of all time.')">
+                    <img src='images/faker.jpeg' alt="Faker">
+                    <h3>Sang-hyeok "Faker" Lee</h3>
+                    <p>Role: Mid Laner</p>
+                    <p>Bio: Faker is a legendary mid laner known for his incredible mechanics and strategic mind. He has led T1 to multiple world championships and is widely regarded as one of the greatest League of Legends players of all time.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Gumayusi', 'images/gumayusi.jpeg', 'AD Carry', 'Gumayusi is an exceptional AD Carry, known for his aggressive playstyle and precise positioning. His ability to deal consistent damage in team fights makes him a key player for T1.')">
+                    <img src='images/gumayusi.jpeg' alt="Gumayusi">
+                    <h3>Min-hyeong "Gumayusi" Lee</h3>
+                    <p>Role: AD Carry</p>
+                    <p>Bio: Gumayusi is an exceptional AD Carry, known for his aggressive playstyle and precise positioning. His ability to deal consistent damage in team fights makes him a key player for T1.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Oner', 'images/oner.jpeg', 'Jungler', 'Oner is T1\'s jungler, praised for his excellent map awareness and ability to control the game\'s pace. His synergy with the team and aggressive plays often give T1 a strategic edge.')">
+                    <img src='images/oner.jpeg' alt="Oner">
+                    <h3>Yeong-jun "Oner" Moon</h3>
+                    <p>Role: Jungler</p>
+                    <p>Bio: Oner is T1's jungler, praised for his excellent map awareness and ability to control the game's pace. His synergy with the team and aggressive plays often give T1 a strategic edge.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Zeus', 'images/zeus.jpeg', 'Top Laner', 'Zeus is a dominant top laner known for his strong laning phase and impactful teleports. He consistently puts pressure on the enemy team and creates opportunities for his team to capitalize on.')">
+                    <img src='images/zeus.jpeg' alt="Zeus">
+                    <h3>Woo-je "Zeus" Choi</h3>
+                    <p>Role: Top Laner</p>
+                    <p>Bio: Zeus is a dominant top laner known for his strong laning phase and impactful teleports. He consistently puts pressure on the enemy team and creates opportunities for his team to capitalize on.</p>
+                </div>
+                <div class="team-member" onclick="showModal('Keria', 'images/keria.jpeg', 'Support', 'Keria is a world-class support, known for his exceptional vision control and playmaking abilities. He provides critical support to his teammates, ensuring their success in both laning and team fights.')">
+                    <img src='images/keria.jpeg' alt="Keria">
+                    <h3>Min-seok "Keria" Ryu</h3>
+                    <p>Role: Support</p>
+                    <p>Bio: Keria is a world-class support, known for his exceptional vision control and playmaking abilities. He provides critical support to his teammates, ensuring their success in both laning and team fights.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="playerName"></h2>
+            <img id="playerImage" src="" alt="">
+            <p id="playerRole"></p>
+            <p id="playerBio"></p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(name, image, role, bio) {
+            document.getElementById('playerName').textContent = name;
+            document.getElementById('playerImage').src = image;
+            document.getElementById('playerRole').textContent = role;
+            document.getElementById('playerBio').textContent = bio;
+            document.getElementById('playerModal').style.display = "block";
+        }
+
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('playerModal').style.display = "none";
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('playerModal')) {
+                document.getElementById('playerModal').style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

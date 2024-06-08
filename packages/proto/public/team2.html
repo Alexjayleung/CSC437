@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/page.css"/>
+    <link rel="stylesheet" href="/styles/tokens.css">
+    <link rel="resetrules" href="/styles/reset.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/drop-down.js"></script>
+    <script type="module" src="/js/json-loader.js"></script>
+
+    <script type="module">
+        import { relayEvent } from "/js/relay-event.js";
+        window.relayEvent = relayEvent;
+    </script>
+
+    <script type="module">
+        function toggleDarkMode(page, checked) {
+        page.classList.toggle("dark-mode", checked);
+    }
+
+        document.body.addEventListener("dark-mode", (event) =>
+        toggleDarkMode(
+        event.currentTarget,
+        event.detail.checked
+      )
+    );
+    </script>
+
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>GAMER'S GUIDE</h1>
+                <div class="login">
+                    <drop-down>
+                        <button class="login-btn">Log In</button>
+                        <label
+                            onchange="relayEvent(event, 'dark-mode', {checked: event.target.checked})">
+                            <input type="checkbox" autocomplete="off" /> Dark mode
+                        </label>
+                </drop-down>
+                </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a >About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="background" style="background-image: url('images/team.jpeg');">
+        <h5>League of Legends Teams</h5>
+        <div class="card-container">
+            <div class="card-wrapper">
+                <div class="card" onclick="location.href='t1_roster.html';" style="background-image: url('images/t1.png');">
+                    <div class="card-content">
+                    </div>
+                </div>
+                <div class="card-title">T1</div>
+            </div>
+            <div class="card-wrapper">
+                <div class="card" onclick="location.href='g2_roster.html';" style="background-image: url('images/g2.png');">
+                    <div class="card-content">   
+                    </div>
+                </div>
+                <div class="card-title">G2 Esports</div>
+            </div>
+            <div class="card-wrapper">
+                <div class="card" onclick="location.href='c9_roster.html';" style="background-image: url('images/c9.png');">
+                    <div class="card-content">
+                    </div>
+                </div>
+                <div class="card-title">Cloud9</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
